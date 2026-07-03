@@ -6,29 +6,16 @@
 <title>Book an Orthopaedic Consultation | OrthoNow Bengaluru</title>
 <meta name="description" content="Expert orthopaedic opinion for knee and back pain. 9 clinics across Bengaluru. Book your consultation in under a minute.">
 
-<!--
-  OrthoNow – "Book a Consultation" Landing Page
-  ------------------------------------------------
-  Single self-contained file: HTML + CSS + JS, no frameworks, no external
-  requests (fonts/images/scripts), so it loads instantly and scores well
-  on Core Web Vitals. Every visual element below is drawn with CSS/SVG,
-  not linked image files, to keep the payload tiny.
 
-  Structure of this file:
-    1. <style>  - all CSS, mobile-first with a desktop breakpoint at 768px
-    2. <body>   - hero, trust strip, form, footer note
-    3. <script> - form submit handler: validation -> dataLayer push ->
-                  thank-you state (no reload)
--->
 
 <style>
-  /* ---------- Design tokens ---------- */
+  
   :root {
-    --color-bg: #F6F7F5;          /* clinical off-white */
-    --color-primary: #123C4A;     /* deep clinical navy-teal */
+    --color-bg: #F6F7F5;          
+    --color-primary: #123C4A;     
     --color-primary-light: #1E5568;
-    --color-accent: #F2874B;      /* warm CTA orange, used ONLY for the CTA */
-    --color-accent-dark: #D96F35;
+    --color-accent: #B84F19;      
+    --color-accent-dark: #A0430F;
     --color-text: #1B2226;
     --color-muted: #5A6B70;
     --color-card: #FFFFFF;
@@ -60,7 +47,7 @@
     padding: 0 20px;
   }
 
-  /* ---------- Header ---------- */
+  
   .site-header {
     background: var(--color-primary);
     color: #fff;
@@ -129,7 +116,7 @@
   }
   .badge svg { width: 14px; height: 14px; flex-shrink: 0; }
 
-  /* ---------- Form Card ---------- */
+  
   .form-card {
     background: var(--color-card);
     color: var(--color-text);
@@ -162,7 +149,7 @@
     padding: 13px 14px;
     border: 1.5px solid var(--color-border);
     border-radius: 8px;
-    font-size: 16px; /* 16px avoids iOS zoom-on-focus */
+    font-size: 16px; 
     font-family: var(--font);
     background: #FBFCFB;
     transition: border-color 0.15s ease;
@@ -203,7 +190,7 @@
     text-align: center;
   }
 
-  /* ---------- Thank you state ---------- */
+  
   .thank-you {
     display: none;
     text-align: center;
@@ -246,7 +233,7 @@
     color: var(--color-muted);
   }
 
-  /* ---------- Body sections ---------- */
+  
   .section {
     padding: 40px 0;
   }
@@ -277,7 +264,7 @@
   .info-card h3 { font-size: 15.5px; margin: 0 0 6px; }
   .info-card p { font-size: 13.5px; color: var(--color-muted); margin: 0; }
 
-  /* Sticky mobile CTA */
+  
   .sticky-cta {
     position: fixed;
     bottom: 0; left: 0; right: 0;
@@ -299,10 +286,9 @@
     text-align: center;
     font-size: 12px;
     color: var(--color-muted);
-    padding: 18px 0 90px; /* extra bottom padding so sticky CTA never covers content */
+    padding: 18px 0 90px; 
   }
 
-  /* ---------- Desktop ---------- */
   @media (min-width: 768px) {
     .hero .wrap { flex-direction: row; align-items: center; }
     .hero-copy { flex: 1.1; }
@@ -311,7 +297,7 @@
     .form-card { flex: 1; max-width: 420px; }
     .trust-grid { grid-template-columns: repeat(3, 1fr); }
     .info-grid { grid-template-columns: repeat(3, 1fr); }
-    .sticky-cta { display: none; } /* desktop has the form visible already */
+    .sticky-cta { display: none; } 
     footer { padding-bottom: 30px; }
   }
 </style>
@@ -327,6 +313,7 @@
     </div>
   </header>
 
+  <main>
   <section class="hero">
     <div class="wrap">
       <div class="hero-copy">
@@ -422,20 +409,21 @@
     </div>
   </section>
 
+  
+  <button class="sticky-cta" id="stickyCta" type="button">Book My Consultation →</button>
+  </main>
+
   <footer>
     <div class="wrap">
       OrthoNow — a chain of orthopaedic clinics across Bengaluru, Hyderabad &amp; Chennai. This landing page is a build assignment demo.
     </div>
   </footer>
 
-  <!-- Mobile-only sticky CTA: jumps focus to the form instead of duplicating it -->
-  <button class="sticky-cta" id="stickyCta" type="button">Book My Consultation →</button>
-
 <script>
   (function () {
     "use strict";
 
-    // Make sure dataLayer exists even if GTM hasn't injected it yet
+    
     window.dataLayer = window.dataLayer || [];
 
     var form = document.getElementById('consultForm');
@@ -448,7 +436,7 @@
     var stickyCta = document.getElementById('stickyCta');
 
     function isValidPhone(value) {
-      // Basic Indian mobile check: 10 digits, optionally with +91 prefix
+      
       var digits = value.replace(/\D/g, '');
       if (digits.length === 12 && digits.startsWith('91')) digits = digits.slice(2);
       return /^[6-9]\d{9}$/.test(digits);
@@ -459,7 +447,7 @@
     }
 
     form.addEventListener('submit', function (e) {
-      e.preventDefault(); // no page reload, ever
+      e.preventDefault(); 
 
       var nameVal = nameInput.value.trim();
       var phoneVal = phoneInput.value.trim();
@@ -471,12 +459,10 @@
       setInvalid(phoneField, phoneInvalid);
 
       if (nameInvalid || phoneInvalid) {
-        return; // stop here — do NOT push to dataLayer on a failed/invalid attempt
+        return; 
       }
 
-      // ---- This is the actual conversion event GTM listens for ----
-      // Note: we deliberately do NOT push name/phone (PII) into the dataLayer.
-      // GA4/Ads only need to know *that* a submission happened and from where.
+      
       window.dataLayer.push({
         event: 'consultation_form_submitted',
         form_location: 'hero_form',
@@ -484,15 +470,12 @@
         page_path: window.location.pathname
       });
 
-      // In production this is where you'd also fire an async fetch()
-      // to your backend / HubSpot Forms API — omitted here since Task 3
-      // covers that integration design separately.
-
+      
       formCard.classList.add('submitted');
       thankYou.classList.add('visible');
     });
 
-    // Sticky mobile CTA scrolls to + focuses the form instead of being a second form
+    
     stickyCta.addEventListener('click', function () {
       formCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
       setTimeout(function () { nameInput.focus(); }, 350);
