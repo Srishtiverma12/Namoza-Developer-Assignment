@@ -22,3 +22,5 @@ task3-integration.md      → Task 03: HubSpot + WhatsApp + Google Ads integrati
 
 - Task 2 has no external requests (no font/image/script CDN calls) by design — this keeps Core Web Vitals high without needing image optimisation tooling.
 - Task 1's booking-funnel dataLayer JSON assumes the front-end team pushes events at step transitions; GTM cannot detect in-page step changes on its own — this is called out explicitly in the schema doc.
+**https://srishtiverma12.github.io/Namoza-Developer-Assignment/task2-landing-page.html**
+  
